@@ -1,134 +1,175 @@
 def atomic_number():
- atomic_number = int(input("Enter the atomic number of element you want to look up : "))
- read_csv()
+    try:
+        atomic_no = input("Enter the atomic number of element you want to look up : ").strip()
+        if not atomic_no:
+            print("Atomic number cannot be empty")
+            return
 
- csv = open('periodic_table.csv', 'r')
- csv.readline()
- for line in csv:
-  element = line.split(',')
- 
-  if int(element[2]) == atomic_number: 
-   print(f"Atomic number : {element[2]}")
-   print(f"Atomic name : {element[0]}")
-   print(f"Symbol : {element[1]}")
-   print(f"Mass : {element[3]}")
-   print(f"Density : {float(element[4]):.10f}")
-   print(f"Group : {element[5]}")
-   print(f"Block : {element[6]}")
+        atomic_no = int(atomic_no)
 
+        with open("periodic_table.csv", "r") as csv:
+            csv.readline()
+            found = False
 
- csv.close()
+            for line in csv:
+                try:
+                    element = line.strip().split(',')
+                    if int(element[2]) == atomic_no:
+                        found = True
+                        print(f"Atomic number : {element[2]}")
+                        print(f"Atomic name   : {element[0]}")
+                        print(f"Symbol        : {element[1]}")
+                        print(f"Mass          : {element[3]}")
+                        print(f"Density       : {float(element[4]):.10f}")
+                        print(f"Group         : {element[5]}")
+                        print(f"Block         : {element[6]}")
+                        break
+                except (IndexError, ValueError):
+                    continue
+
+            if not found:
+                print("Element not found")
+
+    except ValueError:
+        print("Please enter a valid integer atomic number")
+    except FileNotFoundError:
+        print("periodic_table.csv file not found")
+    except KeyboardInterrupt:
+        print("\nOperation interrupted by user")
+    except Exception as e:
+        print(" Unexpected error:", e)
+
 
 def element_name():
- atomic_name = input("Enter element name : ")
- atomic_name = atomic_name.capitalize()
+    try:
+        atomic_name = input("Enter element name : ").strip()
+        if not atomic_name:
+            print("Element name cannot be empty")
+            return
 
- csv = open('periodic_table.csv', 'r')
- csv.readline()
+        atomic_name = atomic_name.capitalize()
 
- for line in csv:
-  element = line.split(',')
-  if element[0] == atomic_name:
-   print(f"Atomic number : {element[2]}")
-   print(f"Atomic name : {element[0]}")
-   print(f"Symbol : {element[1]}")
-   print(f"Mass : {element[3]}")
-   print(f"Density : {float(element[4]):.10f}")
-   print(f"Group : {element[5]}")
-   print(f"Block : {element[6]}")
+        with open("periodic_table.csv", "r") as csv:
+            csv.readline()
+            found = False
 
- csv.close()
+            for line in csv:
+                try:
+                    element = line.strip().split(',')
+                    if element[0] == atomic_name:
+                        found = True
+                        print(f"Atomic number : {element[2]}")
+                        print(f"Atomic name   : {element[0]}")
+                        print(f"Symbol        : {element[1]}")
+                        print(f"Mass          : {element[3]}")
+                        print(f"Density       : {float(element[4]):.10f}")
+                        print(f"Group         : {element[5]}")
+                        print(f"Block         : {element[6]}")
+                        break
+                except (IndexError, ValueError):
+                    continue
+
+            if not found:
+                print("Element not found")
+
+    except FileNotFoundError:
+        print("periodic_table.csv file not found")
+    except KeyboardInterrupt:
+        print("\nOperation interrupted by user")
+    except Exception as e:
+        print(" Unexpected error:", e)
+
 
 def atomic_symbol():
- atomic_symbol = input("Enter element symbol : ")
- atomic_symbol = atomic_symbol.capitalize()
+    try:
+        atomic_symbol = input("Enter element symbol : ").strip()
+        if not atomic_symbol:
+            print("Element symbol cannot be empty")
+            return
 
- csv = open('periodic_table.csv', 'r')
- csv.readline()
+        atomic_symbol = atomic_symbol.capitalize()
 
- for line in csv:
-  element = line.split(',')
-  if element[1] == atomic_symbol:
-   print(f"Atomic number : {element[2]}")
-   print(f"Atomic name : {element[0]}")
-   print(f"Symbol : {element[1]}")
-   print(f"Mass : {element[3]}")
-   print(f"Density : {float(element[4]):.10f}")
-   print(f"Group : {element[5]}")
-   print(f"Block : {element[6]}")
+        with open("periodic_table.csv", "r") as csv:
+            csv.readline()
+            found = False
 
- csv.close()
+            for line in csv:
+                try:
+                    element = line.strip().split(',')
+                    if element[1] == atomic_symbol:
+                        found = True
+                        print(f"Atomic number : {element[2]}")
+                        print(f"Atomic name   : {element[0]}")
+                        print(f"Symbol        : {element[1]}")
+                        print(f"Mass          : {element[3]}")
+                        print(f"Density       : {float(element[4]):.10f}")
+                        print(f"Group         : {element[5]}")
+                        print(f"Block         : {element[6]}")
+                        break
+                except (IndexError, ValueError):
+                    continue
+
+            if not found:
+                print("Element not found")
+
+    except FileNotFoundError:
+        print("periodic_table.csv file not found")
+    except KeyboardInterrupt:
+        print("\nOperation interrupted by user")
+    except Exception as e:
+        print("Unexpected error:", e)
+
 
 def molecule():
- molecule = input("Enter molecule : ")
- print(molecule)
- 
- set1 = set()
- set2 = set()
- set3 = set()
- count = {}
+    try:
+        molecule = input("Enter molecule : ").strip()
+        if not molecule:
+            print("Molecule cannot be empty")
+            return
 
- if molecule.isupper():
-  csv = open('periodic_table.csv', 'r')
-  csv.readline()
-  for line in csv:
-   element = line.split(',')
-   
-   for i in molecule:
-    if i == element[1]:
-     print(f"Atomic number : {element[2]}")
-     print(f"Atomic name : {element[0]}")
-     print(f"Symbol : {element[1]}")
-     print(f"Mass : {element[3]}")
-     print(f"Density : {float(element[4]):.10f}")
-     print(f"Group : {element[5]}")
-     print(f"Block : {element[6]}")
+        if not molecule[0].isupper():
+            print("Invalid molecule format")
+            return
 
-  csv.close()
+        elements = set()
+        i = 0
 
-  
- else:
-  for i in molecule:
-   if i.islower():
-    n = molecule.find(i)
-    element = molecule[n-1:n+1]
-    set1.add(element)
+        while i < len(molecule):
+            if i + 1 < len(molecule) and molecule[i + 1].islower():
+                elements.add(molecule[i:i + 2])
+                i += 2
+            elif molecule[i].isupper():
+                elements.add(molecule[i])
+                i += 1
+            else:
+                i += 1
 
-   else:
-    set1.add(i)
+        with open("periodic_table.csv", "r") as csv:
+            csv.readline()
+            found_any = False
 
-  for i in range(len(molecule)):
-   if i + 1 < len(molecule) and molecule[i+1].islower():
-    set2.add(molecule[i])
+            for line in csv:
+                try:
+                    element = line.strip().split(',')
+                    if element[1] in elements:
+                        found_any = True
+                        print("\n--------------------------")
+                        print(f"Atomic number : {element[2]}")
+                        print(f"Atomic name   : {element[0]}")
+                        print(f"Symbol        : {element[1]}")
+                        print(f"Mass          : {element[3]}")
+                        print(f"Density       : {float(element[4]):.10f}")
+                        print(f"Group         : {element[5]}")
+                        print(f"Block         : {element[6]}")
+                except (IndexError, ValueError):
+                    continue
 
-   set3 = set1 - set2
+            if not found_any:
+                print("No valid elements found in molecule")
 
-  for i in molecule:
-   count.setdefault(i,0)
-   count[i] += 1
-
-  for k,v in count.items():
-   if v > 1:
-    set3.add(k)
- 
-  csv = open('periodic_table.csv', 'r')
-  csv.readline()
-  for line in csv:
-   element = line.split(',')
-   for i in set3:
-    if i == element[1]:
-     print(f"Atomic number : {element[2]}")
-     print(f"Atomic name : {element[0]}")
-     print(f"Symbol : {element[1]}")
-     print(f"Mass : {element[3]}")
-     print(f"Density : {float(element[4]):.10f}")
-     print(f"Group : {element[5]}")
-     print(f"Block : {element[6]}")
-  
-  csv.close()
-
-
-
-
-
- 
+    except FileNotFoundError:
+        print("periodic_table.csv file not found")
+    except KeyboardInterrupt:
+        print("\n Operation interrupted by user")
+    except Exception as e:
+        print("Unexpected error:", e)
